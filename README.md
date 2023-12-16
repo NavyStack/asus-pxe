@@ -2,7 +2,7 @@
 
 Openwrt 올리기는 부담스럽고, Merlin은 지원하지 않고 PXE는 필요할 때,
 간단히 관리자 페이지에서 SSH 활성화 후에
-아래를 적절하게 수정 하여 /jffs/configs/ 등 /jffs/경로에 저장
+아래를 적절하게 수정 하여 /jffs/configs/ 등 /jffs/경로에 저장 (/jffs/경로의 파일은 재부팅시 삭제되지 않지만, /etc/dnsmasq.conf파일에 기록한 내용은 재부팅시 삭제됨.)
 
 iventoy 기준으로 작성함 [링크](https://www.iventoy.com/en/doc_ext_dhcp.html)
 
@@ -31,6 +31,8 @@ echo "Updating PXE settings"
 dnsmasq
 
 ```
+
+refer to RFC4578
 
 dockerhub [바로가기](https://hub.docker.com/r/navystack/iventoy) / 해당 깃허브 [바로가기](https://github.com/NavyStack/iventoy-docker)
 
