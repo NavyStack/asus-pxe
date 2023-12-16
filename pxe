@@ -1,0 +1,22 @@
+#!/bin/sh
+
+file="/etc/dnsmasq.conf"
+match_line="dhcp-match=set:UEFI,60,PXEClient:Arch:00007"
+boot_uefi_line="dhcp-boot=tag:UEFI,iventoy_loader_16000_uefi,192.168.0.200"
+boot_bios_line="dhcp-boot=tag:!UEFI,iventoy_loader_16000_bios,192.168.0.200"
+
+if ! grep -qF "$match_line" "$file"; then
+    echo "$match_line" >> "$file"
+fi
+
+if ! grep -qF "$boot_uefi_line" "$file"; then
+    echo "$boot_uefi_line" >> "$file"
+fi
+
+if ! grep -qF "$boot_bios_line" "$file"; then
+    echo "$boot_bios_line" >> "$file"
+fi
+
+echo "Updating PXE settings"
+
+dnsmasq
