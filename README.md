@@ -10,7 +10,7 @@ iventoy 기준으로 작성함 [링크](https://www.iventoy.com/en/doc_ext_dhcp.
 #!/bin/sh
 
 file="/etc/dnsmasq.conf"
-match_line="dhcp-match=set:UEFI,60,PXEClient:Arch:00007"
+match_line="dhcp-match=set:UEFI,option:client-arch,7"
 boot_uefi_line="dhcp-boot=tag:UEFI,iventoy_loader_16000_uefi,192.168.0.200"
 boot_bios_line="dhcp-boot=tag:!UEFI,iventoy_loader_16000_bios,192.168.0.200"
 
