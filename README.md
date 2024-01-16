@@ -1,10 +1,14 @@
 # Asus PXE
 
-Openwrt 올리기는 부담스럽고, Merlin은 지원하지 않고 PXE는 필요할 때,
-간단히 관리자 페이지에서 SSH 활성화 후에
-아래를 적절하게 수정 하여 /jffs/configs/ 등 /jffs/경로에 저장 (/jffs/경로의 파일은 재부팅시 삭제되지 않지만, /etc/dnsmasq.conf파일에 기록한 내용은 재부팅시 삭제됨.)
+Openwrt를 설치하기가 번거롭고, Merlin은 지원하지 않으며, PXE는 필요한 사용하는 상황에서,
 
-iventoy 기준으로 작성함 [링크](https://www.iventoy.com/en/doc_ext_dhcp.html)
+1. 간단하게 관리자 페이지에서 SSH를 활성화하고,
+2. 다음 내용을 수정하여 적절한 위치인 /jffs/configs/ 또는 /jffs/ 경로에 저장합니다.
+
+> [!IMPORTANT]
+> /jffs/ 경로에 저장한 파일은 재부팅해도 삭제되지 않지만, /etc/dnsmasq.conf 파일에 기록한 내용은 재부팅 시 삭제됩니다.
+
+또한, iventoy 기준으로 작성되었으며 해당 문서는 [공식 사이트](https://www.iventoy.com/en/doc_ext_dhcp.html)에서 확인할 수 있습니다.
 
 ```sh
 #!/bin/sh
@@ -32,13 +36,17 @@ dnsmasq
 
 ```
 
-refer to RFC4578
+Refer to [RFC4578](https://en.wikipedia.org/wiki/Preboot_Execution_Environment)
+<br><br>
+Dockerhub [바로가기](https://hub.docker.com/r/navystack/iventoy) / 해당 깃허브 [바로가기](https://github.com/NavyStack/iventoy-docker)
+<br><br>
 
-dockerhub [바로가기](https://hub.docker.com/r/navystack/iventoy) / 해당 깃허브 [바로가기](https://github.com/NavyStack/iventoy-docker)
+> [!TIP]
+> 우연히 iventoy 주소가 192.168.0.200 이라면 간단히 ssh 접속후
 
-우연히 iventoy 주소가 192.168.0.200 이라면 간단히 ssh 접속후
-
+```sh
 mkdir -p /jffs/configs/ && \
 curl -o /jffs/configs/pxe https://github.com/NavyStack/asus-pxe/blob/main/pxe && \
 chmod +x /jffs/configs/pxe && \
 sh /jffs/configs/pxe
+```
